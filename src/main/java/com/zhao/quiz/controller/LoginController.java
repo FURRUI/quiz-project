@@ -131,8 +131,8 @@ public class LoginController {
         studentService.AddStudent(student);
         return "redirect:/foreLogin";
     }
-    @RequestMapping("/zhao")
-    public String zhao(){
-        return "stage/zhao";
-    }
+//@RequestMapping("/zhao")
+//public String zhao(){
+//  return "stage/zhao";
+//    }
 }

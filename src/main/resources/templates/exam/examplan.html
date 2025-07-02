@@ -1,37 +1,146 @@
 <!DOCTYPE html>
-<html lang="en"	xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
     <title>在线考试系统待考试卷</title>
     <!-- Bootstrap core CSS -->
     <link href="#" th:href="@{/webjars/bootstrap/4.0.0/css/bootstrap.min.css}" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #f8f9fa;
+            color: #2c3e50;
+        }
+
+        /* 考试卡片样式 */
+        .exam-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            padding: 25px;
+            margin-bottom: 30px;
+            transition: all 0.3s;
+            height: 100%;
+        }
+
+        .exam-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .exam-title {
+            color: #2c3e50;
+            font-weight: 700;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .exam-time {
+            color: #7f8c8d;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+
+        .exam-time i {
+            margin-right: 8px;
+            color: #667eea;
+            width: 20px;
+            text-align: center;
+        }
+
+        .btn-exam {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 10px 25px;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-exam:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+            color: white;
+        }
+
+        .btn-exam i {
+            margin-right: 8px;
+        }
+
+        .page-header {
+            margin: 30px 0;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .page-title {
+            font-weight: 700;
+            color: #2c3e50;
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .exam-card {
+                padding: 20px;
+            }
+
+            .exam-title {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
 </head>
 <body>
 <div class="container">
-
-    <!--examnav-->
+    <!-- 导航栏 -->
     <div th:replace="commons/bar::#examnav(activeUri='/exam/toExam')"></div>
 
-    <div class="row">
-        <div class="col-xs-6 col-lg-4" th:each="exa:${Exams}">
-            <h2 th:text="${exa.paper.paperName}"></h2>
-            <p th:text="'开始时间：'+${#dates.format(exa.examBegin, 'yyyy-MM-dd HH:mm')}"></p>
-            <p th:text="'结束时间：'+${#dates.format(exa.examEnd, 'yyyy-MM-dd HH:mm')}"></p>
-            <p><a class="btn btn-default" href="#" th:href="@{/exam/toDoExam/}+${exa.paperId}+'?examId='+${exa.examId}" role="button">开始考试 »</a></p>
-        </div><!--/.col-xs-6.col-lg-4-->
-
+    <!-- 页面标题 -->
+    <div class="page-header">
+        <h2 class="page-title"><i class="fas fa-clipboard-list"></i> 待考试卷</h2>
     </div>
 
-    <!--footer-->
-    <div th:replace="commons/bar::footer"></div>
-</div> <!-- /container -->
+    <!-- 考试列表 -->
+    <div class="row">
+        <div class="col-md-6 col-lg-4" th:each="exa:${Exams}">
+            <div class="exam-card">
+                <h3 class="exam-title" th:text="${exa.paper.paperName}"></h3>
+
+                <p class="exam-time">
+                    <i class="far fa-clock"></i>
+                    <span th:text="'开始时间：'+${#dates.format(exa.examBegin, 'yyyy-MM-dd HH:mm')}"></span>
+                </p>
+
+                <p class="exam-time">
+                    <i class="far fa-clock"></i>
+                    <span th:text="'结束时间：'+${#dates.format(exa.examEnd, 'yyyy-MM-dd HH:mm')}"></span>
+                </p>
+
+                <div class="text-center">
+                    <a class="btn btn-exam" href="#" th:href="@{/exam/toDoExam/}+${exa.paperId}+'?examId='+${exa.examId}" role="button">
+                        <i class="fas fa-pen-alt"></i> 开始考试
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+<script src="assets/js/core/jquery.3.2.1.min.js" th:src="@{/webjars/jquery/3.2.1/jquery.js}"></script>
+<script src="assets/js/bootstrap.min.js" th:src="@{/webjars/bootstrap/4.0.0/js/bootstrap.min.js}"></script>
 </body>
 </html>

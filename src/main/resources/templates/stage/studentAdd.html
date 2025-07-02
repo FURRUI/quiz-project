@@ -1,44 +1,180 @@
 <!DOCTYPE html>
-<html lang="en"	xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
     <title>在线考试系统学生注册</title>
     <!-- Bootstrap core CSS -->
     <link href="#" th:href="@{/webjars/bootstrap/4.0.0/css/bootstrap.min.css}" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <style>
+        body {
+            background: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Nunito', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .overlay {
+            background-color: rgba(255, 255, 255, 0.9);
+            width: 100%;
+            min-height: 100vh;
+            padding: 40px 0;
+        }
+
+        .register-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .register-card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-bottom: none;
+        }
+
+        .card-body {
+            padding: 30px;
+        }
+
+        .form-control {
+            border-radius: 50px;
+            padding: 12px 20px;
+            margin-bottom: 20px;
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+
+        .btn-custom {
+            border-radius: 50px;
+            padding: 10px 25px;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin-right: 10px;
+        }
+
+        .btn-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-radio-label {
+            display: inline-flex;
+            align-items: center;
+            cursor: pointer;
+            margin-right: 15px;
+        }
+
+        .form-radio-input {
+            margin-right: 5px;
+        }
+
+        .form-radio-sign {
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .form-radio-sign:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 16px;
+            height: 16px;
+            border: 2px solid #667eea;
+            border-radius: 50%;
+        }
+
+        .form-radio-input:checked ~ .form-radio-sign:after {
+            content: "";
+            position: absolute;
+            left: 4px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 8px;
+            height: 8px;
+            background-color: #667eea;
+            border-radius: 50%;
+        }
+
+        h4.page-title {
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        label {
+            font-weight: 600;
+            color: #555;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .card-action {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-top: 1px solid #eee;
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-    <!--main panel-->
-    <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-8">
-            <div class="main-panel">
-                <div class="content">
-                    <div class="container">
-                        <h4 class="page-title">学生注册页面</h4>
+<div class="overlay">
+    <div class="container register-container">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="card register-card">
+                    <div class="card-header">
+                        <h4 class="page-title">学生注册</h4>
+                    </div>
+                    <div class="card-body">
                         <form th:action="@{/prexam/AddStudent}" method="post">
-                            <div class="col-md-8">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="form-group">
-                                            <label for="name">姓名</label>
-                                            <input type="text" class="form-control" required name="studentName" id="name" placeholder="shuzhao">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="name">账号</label>
-                                            <input type="text" class="form-control" required name="studentAccount" id="account" placeholder="数字字母">
-                                            <small id="accounthelp" class="form-text text-muted"></small>
-                                        </div>
-                                        <div class="form-check">
-                                            <label>性别</label><br>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="name">姓名</label>
+                                        <input type="text" class="form-control" required name="studentName" id="name" placeholder="请输入姓名">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="account">账号</label>
+                                        <input type="text" class="form-control" required name="studentAccount" id="account" placeholder="数字字母组合">
+                                        <small id="accounthelp" class="form-text text-muted">用于登录的用户名</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>性别</label>
+                                        <div class="d-flex">
                                             <label class="form-radio-label">
-                                                <input class="form-radio-input" type="radio" name="studentGender" value="1">
+                                                <input class="form-radio-input" type="radio" name="studentGender" value="1" checked>
                                                 <span class="form-radio-sign">男</span>
                                             </label>
                                             <label class="form-radio-label ml-3">
@@ -46,39 +182,69 @@
                                                 <span class="form-radio-sign">女</span>
                                             </label>
                                         </div>
-                                        <div class="form-group">
-                                            <label for="email">邮件</label>
-                                            <input type="email" class="form-control" required id="email" name="studentEmail" placeholder="Enter Email">
-                                            <small id="emailHelp" class="form-text text-muted"></small>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="password">密码</label>
-                                            <input type="password" class="form-control" required id="password" name="studentPwd" placeholder="Password">
-                                        </div>
-                                        <div class="form-group">
-                                            <!--由数据库中查询出来-->
-                                            <label>班级</label>
-                                            <select class="form-control" name="classeId">
-                                                <option th:each="cla:${allClasees}" th:text="${cla.classeName}" th:value="${cla.classeId}"></option>
-                                            </select>
-                                        </div>
                                     </div>
-
-                                    <div class="card-action">
-                                        <button class="btn btn-success" type="submit">Submit</button>
-                                        <button class="btn btn-danger" type="reset">Cancel</button>
-                                        <button><a class="btn btn-sm btn-info" th:href="@{/foreLogin}">返回</a></button>
-                                    </div>
-
                                 </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="email">邮箱</label>
+                                        <input type="email" class="form-control" required id="email" name="studentEmail" placeholder="请输入邮箱">
+                                        <small id="emailHelp" class="form-text text-muted">用于找回密码</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="password">密码</label>
+                                        <input type="password" class="form-control" required id="password" name="studentPwd" placeholder="请输入密码">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="confirmPassword">确认密码</label>
+                                        <input type="password" class="form-control" required id="confirmPassword" placeholder="请再次输入密码">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>班级</label>
+                                        <select class="form-control" name="classeId">
+                                            <option th:each="cla:${allClasees}" th:text="${cla.classeName}" th:value="${cla.classeId}"></option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card-action">
+                                <button class="btn btn-custom btn-success" type="submit">提交注册</button>
+                                <button class="btn btn-custom btn-danger" type="reset">重置</button>
+                                <a class="btn btn-custom btn-info" th:href="@{/foreLogin}">返回登录</a>
                             </div>
                         </form>
                     </div>
                 </div>
+            </div>
         </div>
-        <div class="col-md-2"></div>
     </div>
 </div>
-</div>
+
+<script src="assets/js/core/jquery.3.2.1.min.js" th:src="@{/webjars/jquery/3.2.1/jquery.js}"></script>
+<script src="assets/js/bootstrap.min.js" th:src="@{/webjars/bootstrap/4.0.0/js/bootstrap.min.js}"></script>
+<script>
+    // 密码确认验证
+    $(document).ready(function() {
+        $('#confirmPassword').on('keyup', function() {
+            if ($(this).val() !== $('#password').val()) {
+                $(this).addClass('is-invalid');
+            } else {
+                $(this).removeClass('is-invalid');
+            }
+        });
+    });
+</script>
 </body>
 </html>

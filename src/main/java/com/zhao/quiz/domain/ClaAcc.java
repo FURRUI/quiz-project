@@ -2,11 +2,7 @@ package com.zhao.quiz.domain;
 
 import lombok.Data;
 
-/**
- * @Auther: swung
- * @Date: 2020/2/1 13:22
- * @Description:及格率展示
- */
+
 @Data
 public class ClaAcc {
     private int clasaccId;

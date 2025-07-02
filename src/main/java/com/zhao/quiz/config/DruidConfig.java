@@ -32,7 +32,7 @@ public class DruidConfig {
         Map<String,Object> initParams=new HashMap<>();
         initParams.put("loginUsername","admin");
         initParams.put("loginPassword","123456");
-        initParams.put("allow","");//允许所有访问
+        initParams.put("allow","");
 //        initParams.put("deny","192.168.0.102");
         bean.setInitParameters(initParams);
         return  bean;

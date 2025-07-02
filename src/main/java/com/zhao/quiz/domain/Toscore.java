@@ -1,10 +1,6 @@
 package com.zhao.quiz.domain;
 
-/**
- * @Auther: swung
- * @Date: 2020/2/9 10:15
- * @Description:
- */
+
 public class Toscore {
     private int toscoreId;
     private int paperId;

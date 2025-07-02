@@ -142,7 +142,7 @@ public class ExamController {
         return "redirect:/exam/toExam";
     }
     /**
-     * 考试后台
+     * 后台
      * */
     //查看所有考试安排后台
     @RequestMapping("/getAllExam")
